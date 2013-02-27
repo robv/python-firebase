@@ -7,9 +7,12 @@ import json #for dumps
 
 class Firebase():
     ROOT_URL = '' #no trailing slash
+    AUTH_PARAM = None #no trailing slash
 
-    def __init__(self, root_url):
+    def __init__(self, root_url, secret_key = None):
         self.ROOT_URL = root_url.rstrip('/')
+        if secret_key is not None :
+            self.AUTH_PARAM = '?auth=' + secret_key
 
     #These methods are intended to mimic Firebase API calls.
 
@@ -83,4 +86,7 @@ class Firebase():
 
     def __url(self):
         #We append .json to end of ROOT_URL for REST API.
-        return '%s.json' % self.ROOT_URL
+        if self.AUTH_PARAM is not None :
+            return '%s.json' + self.AUTH_PARAM % self.ROOT_URL
+        else
+            return '%s.json' % self.ROOT_URL
