@@ -87,6 +87,6 @@ class Firebase():
     def __url(self):
         #We append .json to end of ROOT_URL for REST API.
         if self.AUTH_PARAM is not None :
-            return '%s.json' + self.AUTH_PARAM % self.ROOT_URL
+            return self.ROOT_URL + '.json' + self.AUTH_PARAM
         else :
             return '%s.json' % self.ROOT_URL
